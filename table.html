@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jquery-3.1.0.js"></script>
+<link rel="stylesheet" type="text/css" href="assets/css/output.css">
+<script ></script>
+
+    <script>
+
+
+        $(function () {
+          $('#hide').on('click', function (e) {
+            e.preventDefault();
+          });
+          $('#hide').hide();
+            $('#create').on('click', function () {
+                $('#create').hide();
+                $('#table').hide();
+                $('#hide').show();
+            });
+        });
+
+        $(function () {
+
+          $("#submit").on("click", function(){
+
+            var name = $('#name').val();
+            var quantity = $('#quantity').val();
+            var price = $('#price').val();
+
+            $.ajax({
+              url: 'groceries.php',
+              method: 'POST',
+              dataType: 'json',
+              data:
+                      sendData = {
+                          name: name,
+                          quantity: quantity,
+                          price: price
+                      }
+            })
+            .done(function (response) {
+              var a = response.name;
+              var b = response.quantity;
+              var c = response.price;
+
+
+              $('#hide').hide();
+              $('#create').show();
+              $('#table').show();
+              $('#table').append('<tr><td></td><td>'+ a +'</td><td>'+ b +'</td><td>'+ c +'</td><td><button class="delete" >Delete</button><button class="change">Change</button></td></tr>');
+
+            });
+
+        })
+          });
+
+      $(function () {
+        $('#second').on('click', '.delete', function () {
+          if(confirm('Are you sure you want to delete this row?')) {
+              $(this).closest('tr').remove();
+          }/*
+          $.ajax({
+            url: 'groceries.php',
+            method: 'POST',
+            dataType: 'json',
+            data: {}
+          })*/
+        })
+      })
+
+
+    </script>
+</head>
+<body>
+	<div id='second'>
+    <button id="create">Add new line:</button>
+        <br>
+        <br>
+	<table id="table">
+  <tr>
+  	<th></th>
+    <th>Name</th>
+    <th>Quantity</th> 
+    <th>Price</th>
+    <th>Change</th>
+  </tr>
+  <tr>
+  	<td></td>
+    <td>banana</td>
+    <td>1</td>
+    <td>3</td>
+    <td><button class="delete">Delete</button><button class="change">Change</button></td>
+  </tr>
+</table>
+      <form id="hide">
+        <label>Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input id="name" type="text"><br>
+        <label>QuantIty:</label>
+        <input id="quantity" type="number"><br>
+        <label>Price:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input id="price" type="number">
+        <button id="submit">Submit</button>
+      </form>
+
+	</div>
+
+</body>
+</html>
