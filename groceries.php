@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-/*
+
     if (isset($_POST['name'])) {
         $_SESSION['name'] = $_POST['name'];
     };
@@ -13,7 +13,7 @@ session_start();
     };
 
     echo json_encode($_SESSION);
-*/
+/*
 if(empty( $_SESSION['data'] )) {
     $_SESSION['data'] = array();
 }
@@ -26,3 +26,4 @@ $output_string = array('name'=>$name,'quantity'=>$quantity,'price'=>$price);
 array_push($_SESSION['data'] , $output_string );
 
 json_encode($_SESSION['data']);
+*/
